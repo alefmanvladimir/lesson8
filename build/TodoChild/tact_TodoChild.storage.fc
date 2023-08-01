@@ -1,0 +1,144 @@
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ bounce:bool to:address value:int257 mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell = SendParameters
+;;
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline {
+    return (bounce, to, value, mode, body, code, data);
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode(slice to, int value, int mode) inline {
+    return (true, to, value, mode, null(), null(), null());
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 2490013878);
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int queryId) inline {
+    return (queryId);
+}
+
+;;
+;; Type: InternalSetTask
+;; Header: 0xbbeae65e
+;; TLB: internal_set_task#bbeae65e task:^string = InternalSetTask
+;;
+
+(slice, ((slice))) $InternalSetTask$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 3152733790);
+    var v'task = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'task));
+}
+
+;;
+;; Type: InternalComplete
+;; Header: 0xcf008c4c
+;; TLB: internal_complete#cf008c4c excess:address = InternalComplete
+;;
+
+(slice, ((slice))) $InternalComplete$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 3472919628);
+    var v'excess = sc_0~__tact_load_address();
+    return (sc_0, (v'excess));
+}
+
+;;
+;; Type: TodoDetails
+;; TLB: _ task:^string completed:bool = TodoDetails
+;;
+
+(slice, int) $TodoDetails$_to_external(((slice, int)) v) inline {
+    var (v'task, v'completed) = v; 
+    return (v'task, v'completed);
+}
+
+((slice, int)) $TodoDetails$_constructor_task_completed(slice task, int completed) inline {
+    return (task, completed);
+}
+
+;;
+;; Type: TodoChild
+;;
+
+builder $TodoChild$_store(builder build_0, (slice, int, slice, int) v) inline {
+    var (v'parent, v'seqno, v'task, v'completed) = v;
+    build_0 = __tact_store_address(build_0, v'parent);
+    build_0 = build_0.store_uint(v'seqno, 256);
+    build_0 = build_0.store_ref(begin_cell().store_slice(v'task).end_cell());
+    build_0 = build_0.store_int(v'completed, 1);
+    return build_0;
+}
+
+(slice, ((slice, int, slice, int))) $TodoChild$_load(slice sc_0) inline {
+    var v'parent = sc_0~__tact_load_address();
+    var v'seqno = sc_0~load_uint(256);
+    var v'task = sc_0~load_ref().begin_parse();
+    var v'completed = sc_0~load_int(1);
+    return (sc_0, (v'parent, v'seqno, v'task, v'completed));
+}
+
+(slice, ((slice, int))) $TodoChild$init$_load(slice sc_0) inline {
+    var v'parent = sc_0~__tact_load_address();
+    var v'seqno = sc_0~load_int(257);
+    return (sc_0, (v'parent, v'seqno));
+}
+
+(slice, int, slice, int) $TodoChild$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    __tact_context_sys = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$TodoChild$_load();
+    } else {
+        ;; Allow only workchain deployments
+        throw_unless(137, my_address().preload_uint(11) == 1024);
+        (slice parent, int seqno) = $sc~$TodoChild$init$_load();
+        $sc.end_parse();
+        return $TodoChild$_contract_init(parent, seqno);
+    }
+}
+
+() $TodoChild$_contract_store((slice, int, slice, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_ref(__tact_context_sys);
+    b = b.store_int(true, 1);
+    b = $TodoChild$_store(b, v);
+    set_data(b.end_cell());
+}

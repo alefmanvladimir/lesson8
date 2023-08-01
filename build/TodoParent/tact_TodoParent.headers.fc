@@ -1,0 +1,148 @@
+;;
+;; Header files for TodoParent
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_verify_address
+slice __tact_verify_address(slice address) inline;
+
+;; __tact_load_address
+(slice, slice) __tact_load_address(slice cs) inline;
+
+;; __tact_store_address
+builder __tact_store_address(builder b, slice address) inline;
+
+;; __tact_create_address
+slice __tact_create_address(int chain, int hash) inline;
+
+;; __tact_compute_contract_address
+slice __tact_compute_contract_address(int chain, cell code, cell data) inline;
+
+;; __tact_my_balance
+int __tact_my_balance() inline;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) inline;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_store_bool
+builder __tact_store_bool(builder b, int v) inline;
+
+;; __tact_slice_eq_bits
+int __tact_slice_eq_bits(slice a, slice b) inline;
+
+;; __tact_dict_set_code
+cell __tact_dict_set_code(cell dict, int id, cell code) inline;
+
+;; __tact_dict_get_code
+cell __tact_dict_get_code(cell dict, int id) inline;
+
+;; $Deploy$_load
+(slice, ((int))) $Deploy$_load(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $NewTodo$_load
+(slice, ((slice))) $NewTodo$_load(slice sc_0) inline;
+
+;; $InternalSetTask$_store
+builder $InternalSetTask$_store(builder build_0, (slice) v) inline;
+
+;; $InternalSetTask$_store_cell
+cell $InternalSetTask$_store_cell((slice) v) inline;
+
+;; $CompleteTodo$_load
+(slice, ((int))) $CompleteTodo$_load(slice sc_0) inline;
+
+;; $InternalComplete$_store
+builder $InternalComplete$_store(builder build_0, (slice) v) inline;
+
+;; $InternalComplete$_store_cell
+cell $InternalComplete$_store_cell((slice) v) inline;
+
+;; $NewTodoResponse$_store
+builder $NewTodoResponse$_store(builder build_0, (int) v) inline;
+
+;; $NewTodoResponse$_store_cell
+cell $NewTodoResponse$_store_cell((int) v) inline;
+
+;; $TodoParent$_store
+builder $TodoParent$_store(builder build_0, (slice, int) v) inline;
+
+;; $TodoParent$_load
+(slice, ((slice, int))) $TodoParent$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $TodoChild$init$_store
+builder $TodoChild$init$_store(builder build_0, (slice, int) v) inline;
+
+;; $TodoParent$_contract_init
+(slice, int) $TodoParent$_contract_init() impure inline_ref;
+
+;; $TodoParent$_contract_load
+(slice, int) $TodoParent$_contract_load() impure inline_ref;
+
+;; $TodoParent$_contract_store
+() $TodoParent$_contract_store((slice, int) v) impure inline;
+
+;; $global_contractAddress
+slice $global_contractAddress((cell, cell) $s) impure inline;
+
+;; $global_send
+() $global_send((int, slice, int, int, cell, cell, cell) $params) impure inline_ref;
+
+;; $TodoChild$_init_child
+(cell, cell) $TodoChild$_init_child(cell sys', slice $parent, int $seqno) inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline;
+
+;; $TodoParent$_fun_numTodos
+((slice, int), int) $TodoParent$_fun_numTodos((slice, int) $self) impure inline_ref;
+
+;; $TodoParent$_fun_todoAddress
+((slice, int), slice) $TodoParent$_fun_todoAddress((slice, int) $self, int $seqno) impure inline_ref;
+
+;; $TodoParent$_fun_forward
+((slice, int), ()) $TodoParent$_fun_forward((slice, int) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $TodoParent$_fun_reply
+((slice, int), ()) $TodoParent$_fun_reply((slice, int) $self, cell $body) impure inline;
+
+;; $TodoParent$_fun_notify
+((slice, int), ()) $TodoParent$_fun_notify((slice, int) $self, cell $body) impure inline;
+
+;; $TodoParent$_fun_requireOwner
+((slice, int), ()) $TodoParent$_fun_requireOwner((slice, int) $self) impure inline_ref;
+
+;; $TodoParent$_fun_owner
+((slice, int), slice) $TodoParent$_fun_owner((slice, int) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_to_body_value_mode_code_data
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_body_value_mode_code_data(slice to, cell body, int value, int mode, cell code, cell data) inline;
+
+;; $InternalSetTask$_constructor_task
+((slice)) $InternalSetTask$_constructor_task(slice task) inline;
+
+;; $NewTodoResponse$_constructor_seqno
+((int)) $NewTodoResponse$_constructor_seqno(int seqno) inline;
+
+;; $SendParameters$_constructor_to_body_value_mode
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_body_value_mode(slice to, cell body, int value, int mode) inline;
+
+;; $InternalComplete$_constructor_excess
+((slice)) $InternalComplete$_constructor_excess(slice excess) inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int queryId) inline;

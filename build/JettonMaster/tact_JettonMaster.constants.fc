@@ -1,0 +1,2 @@
+;; String "TON"
+slice __gen_slice_string_7f23a419b837f87cb02beed6e36d91ee847b2ebce01b9ef5a02df2baf4c081a1() asm "B{b5ee9c72410101010005000006544f4efb3e2b99} B>boc <s PUSHSLICE";
